@@ -50,7 +50,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 		.args(cfg.exe_args.unwrap_or_default());
 
 	let mut dir: Vec<_> = std::fs::read_dir(input_dir)?.collect::<Result<Vec<_>, _>>()?;
-	dir.sort_by_key(|d| d.file_name());
+	dir.sort_by_key(|d| (d.file_name().len(), d.file_name()));
 	for dir in dir {
 		let input = read_to_string(dir.path())?;
 		let file = dir.file_name();
